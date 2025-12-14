@@ -1,0 +1,42 @@
+```
+# Compiled and build artifacts
+*.o
+*.obj
+*.out
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+coverage/
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+
+# Build systems
+build/
+dist/
+target/
+.gradle/
+.mypy_cache/
+
+# PlatformIO specific
+.platformio/
+pioenvs/
+piolibdeps/
+.sconsign.dblite
+```
