@@ -24,6 +24,14 @@
 #define BLUE_LED_PIN 2
 #define BUZZER_PIN 4
 
+// LCD Configuration (16x2 LCD with HD44780 controller)
+#define LCD_RS_PIN 33
+#define LCD_EN_PIN 25
+#define LCD_D4_PIN 26
+#define LCD_D5_PIN 27
+#define LCD_D6_PIN 14
+#define LCD_D7_PIN 12
+
 // Fingerprint Sensor (Software Serial)
 #define FP_RX_PIN 16
 #define FP_TX_PIN 17
