@@ -1,42 +1,37 @@
 ```
-# Compiled and build artifacts
-*.o
-*.obj
-*.out
+# Arduino build artifacts
+*.hex
+*.elf
+*.bin
+*.map
+*.sym
+
+# Arduino IDE cache/build directories
+build/
+.cache/
 
 # Dependencies
-node_modules/
-__pycache__/
-*.pyc
-.pytest_cache/
-.coverage
-htmlcov/
-coverage/
+libraries/
 
 # Logs and temp files
 *.log
 *.tmp
-*.swp
 
-# Environment
+# Environment variables
 .env
 .env.local
-*.env.*
+.env.*
 
 # Editors
 .vscode/
 .idea/
 
-# Build systems
-build/
-dist/
-target/
-.gradle/
-.mypy_cache/
+# OS specific
+.DS_Store
+Thumbs.db
 
-# PlatformIO specific
-.platformio/
-pioenvs/
-piolibdeps/
-.sconsign.dblite
+# Backup files
+*~
+*.bak
+*.swp
 ```
