@@ -6,6 +6,7 @@
 #include "include/keypad_handler.h"
 #include "include/servo_handler.h"
 #include "include/web_server.h"
+#include "include/lcd_handler.h"
 
 // Global objects
 WiFiHandler* wifiHandler;
@@ -14,6 +15,7 @@ RFIDHandler* rfidHandler;
 KeypadHandler* keypadHandler;
 ServoHandler* servoHandler;
 WebServerHandler* webServer;
+LCDHandler* lcdHandler;
 
 // Function prototypes
 void systemInit();
@@ -77,6 +79,12 @@ void systemInit() {
   pinMode(BLUE_LED_PIN, OUTPUT);
   digitalWrite(BLUE_LED_PIN, HIGH);
   
+  // Initialize LCD
+  lcdHandler = new LCDHandler(LCD_RS_PIN, LCD_EN_PIN, LCD_D4_PIN, LCD_D5_PIN, LCD_D6_PIN, LCD_D7_PIN);
+  if (!lcdHandler->begin()) {
+    Serial.println("LCD initialization failed!");
+  }
+  
   // Initialize WiFi
   wifiHandler = new WiFiHandler(WIFI_SSID, WIFI_PASSWORD);
   if (!wifiHandler->begin()) {
@@ -133,6 +141,9 @@ void systemInit() {
 void handleAccessGranted(String method, String user) {
   Serial.println("Access GRANTED - Method: " + method + ", User: " + user);
   
+  // Display on LCD
+  lcdHandler->printAccessMessage(method, user, true);
+  
   // Visual feedback
   digitalWrite(GREEN_LED_PIN, HIGH);
   tone(BUZZER_PIN, 1000, 200);
@@ -149,6 +160,9 @@ void handleAccessGranted(String method, String user) {
 
 void handleAccessDenied(String method, String user) {
   Serial.println("Access DENIED - Method: " + method + ", User: " + user);
+  
+  // Display on LCD
+  lcdHandler->printAccessMessage(method, user, false);
   
   // Visual feedback
   for (int i = 0; i < 3; i++) {
@@ -177,5 +191,12 @@ void updateSystemStatus() {
   if (millis() - lastBlink > 1000) {
     digitalWrite(BLUE_LED_PIN, !digitalRead(BLUE_LED_PIN));
     lastBlink = millis();
+  }
+  
+  // Update LCD periodically with system status
+  static unsigned long lastLCDUpdate = 0;
+  if (millis() - lastLCDUpdate > 5000) { // Update every 5 seconds
+    lcdHandler->printSystemStatus();
+    lastLCDUpdate = millis();
   }
 }
