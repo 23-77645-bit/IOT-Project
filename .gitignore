@@ -1,37 +1,48 @@
 ```
-# Arduino build artifacts
+# Arduino/IoT project specific ignores
 *.hex
 *.elf
 *.bin
 *.map
+*.lst
 *.sym
 
-# Arduino IDE cache/build directories
+# Build artifacts
 build/
-.cache/
+dist/
+*.o
+*.a
+*.so
+*.dylib
+*.dll
 
 # Dependencies
 libraries/
+.platformio/
+.pio/
 
 # Logs and temp files
 *.log
 *.tmp
+*.swp
 
-# Environment variables
+# Environment
 .env
 .env.local
-.env.*
+*.env.*
 
 # Editors
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# OS specific
+# OS
 .DS_Store
 Thumbs.db
 
-# Backup files
-*~
-*.bak
-*.swp
+# Testing and coverage
+.coverage
+coverage/
+htmlcov/
 ```
